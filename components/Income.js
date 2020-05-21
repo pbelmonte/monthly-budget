@@ -35,10 +35,10 @@ const Income = props => {
 
       data.income.push({
         text: enteredText,
-        amount: parseInt(amount),
+        amount: parseFloat(amount),
       })
 
-      data.totalIncome += parseInt(amount)
+      data.totalIncome += parseFloat(amount)
 
       resetValues()
       props.onConfirm(data)
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     maxWidth: '95%',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: Colors.tertiary,
+    borderColor: Colors.positive,
   },
   title: {
     fontSize: 30,

@@ -38,11 +38,11 @@ const AddExpense = props => {
 
       data.expenses.push({
         text: enteredText,
-        amount: parseInt(amount),
+        amount: parseFloat(amount),
         day: props.date.date,
       })
 
-      day[1] = parseInt(day[1]) + parseInt(amount)
+      day[1] = parseFloat(day[1]) + parseFloat(amount)
 
       resetValues()
       props.onConfirm(data)

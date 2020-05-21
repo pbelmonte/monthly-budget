@@ -26,13 +26,13 @@ const HomeScreen = props => {
   const computeBudgets = () => {
     const data = monthData
 
-    data.monthlyBudget = parseInt(data.totalIncome) - parseInt(data.savings) - parseInt(data.totalFixedExpenses)
+    data.monthlyBudget = parseFloat(data.totalIncome) - parseFloat(data.savings) - parseFloat(data.totalFixedExpenses)
 
-    data.dailyBudget = parseInt(data.monthlyBudget) / daysInMonth(todayDate.monthNumber, todayDate.year)
+    data.dailyBudget = parseFloat(data.monthlyBudget) / daysInMonth(todayDate.monthNumber, todayDate.year)
 
     data.days.forEach((day, index) => {
-      day[2] = parseInt(data.dailyBudget) + (index === 0 ? 0 : parseInt(data.days[index - 1][3]))
-      day[3] = parseInt(day[2]) - parseInt(day[1])
+      day[2] = parseFloat(data.dailyBudget) + (index === 0 ? 0 : parseFloat(data.days[index - 1][3]))
+      day[3] = parseFloat(day[2]) - parseFloat(day[1])
     })
 
     setMonthData(data)
@@ -50,11 +50,6 @@ const HomeScreen = props => {
     setIncomeOpen(false)
   }
 
-  const addIncomeHandler = data => {
-    setMonthData(data)
-    computeBudgets()
-  }
-
   const fixedExpensesCloseHandler = () => {
     setFixedExpensesOpen(false)
   }
@@ -63,7 +58,7 @@ const HomeScreen = props => {
     setAddExpenseOpen(false)
   }
 
-  const addExpenseHandler = data => {
+  const confirmHandler = data => {
     setMonthData(data)
     computeBudgets()
   }
@@ -74,15 +69,20 @@ const HomeScreen = props => {
         visible={incomeOpen}
         monthData={monthData}
         onClose={incomeCloseHandler}
-        onConfirm={addIncomeHandler}
+        onConfirm={confirmHandler}
       />
-      <FixedExpenses visible={fixedExpensesOpen} onClose={fixedExpensesCloseHandler} />
+      <FixedExpenses
+        visible={fixedExpensesOpen}
+        onClose={fixedExpensesCloseHandler}
+        monthData={monthData}
+        onConfirm={confirmHandler}
+      />
       <AddExpense
         visible={addExpenseOpen}
         onCancel={addExpenseCancelHandler}
         date={todayDate}
         monthData={monthData}
-        onConfirm={addExpenseHandler}
+        onConfirm={confirmHandler}
       />
       <View style={styles.buttonContainer}>
         <TouchableOpacity
