@@ -20,6 +20,16 @@ const AddExpense = props => {
     setEnteredText(inputText)
   }
 
+  const resetValues = () => {
+    setEnteredValue('')
+    setEnteredText('')
+  }
+
+  const cancelHandler = () => {
+    resetValues()
+    props.onCancel()
+  }
+
   const confirmHandler = () => {
     if (enteredValue !== '' && enteredValue !== '$0') {
       const data = props.monthData
@@ -34,6 +44,7 @@ const AddExpense = props => {
 
       day[1] = parseInt(day[1]) + parseInt(amount)
 
+      resetValues()
       props.onConfirm(data)
       props.onCancel()
     }
@@ -84,7 +95,7 @@ const AddExpense = props => {
           </View>
           <View style={styles.buttonsContainer}>
             <View style={styles.button}>
-              <Button title="Cancelar" color="red" onPress={props.onCancel} />
+              <Button title="Cancelar" color="red" onPress={cancelHandler} />
             </View>
             <View style={styles.button}>
               <Button title="Confirmar" color={Colors.primary} onPress={confirmHandler} />
