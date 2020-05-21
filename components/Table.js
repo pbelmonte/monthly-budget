@@ -53,24 +53,21 @@ const Table = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    borderWidth: 1,
   },
   header: {
     flexDirection: 'row',
-    borderTopWidth: 1,
     justifyContent: 'space-around',
     paddingVertical: 10,
     paddingHorizontal: 10,
-    borderBottomWidth: 1,
     backgroundColor: Colors.primary,
   },
   body: {},
   footer: {
     flexDirection: 'row',
-    borderTopWidth: 1,
     justifyContent: 'space-around',
     paddingVertical: 10,
     paddingHorizontal: 10,
-    borderBottomWidth: 1,
     backgroundColor: Colors.secondary,
   },
   row: {
